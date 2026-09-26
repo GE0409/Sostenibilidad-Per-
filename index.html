@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sostenibilidad y medios — Análisis educomunicativo</title>
+<style>
+:root{
+  --ink:#17352f; --muted:#58706a; --bg:#f4f7f2; --card:#ffffff;
+  --line:#d9e4dd; --accent:#2d7562; --accent2:#d8eadf; --warm:#f0dfb4;
+  --shadow:0 14px 35px rgba(23,53,47,.09); --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
+a{color:inherit}
+.container{width:min(1120px,92%);margin:auto}
+nav{position:sticky;top:0;z-index:20;background:rgba(244,247,242,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.navin{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:66px}
+.brand{font-weight:800;letter-spacing:-.03em}
+.navlinks{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem}
+.navlinks a{text-decoration:none;color:var(--muted)}
+.hero{padding:110px 0 90px; background-image:linear-gradient(rgba(0,0,0,0.20), rgba(0,0,0,0.20)),url("RPP INFOBAE.png");background-size:cover; background-position:center; position:relative; overflow:hidden;}
+.hero:after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;right:-90px;top:-100px;background:rgba(45,117,98,.10)}
+.eyebrow{font-size:.8rem;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:var(--accent)}
+h1{font-size:clamp(2.8rem,7vw,6rem);line-height:.98;letter-spacing:-.06em;max-width:850px;margin:16px 0 22px}
+h2{font-size:clamp(1.8rem,4vw,3rem);line-height:1.05;letter-spacing:-.04em;margin:0 0 16px}
+h3{margin:0 0 8px;font-size:1.15rem}
+.lead{font-size:1.18rem;color:var(--muted);max-width:760px}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:750;border:1px solid var(--ink)}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.light{background:#fff}
+section{padding:82px 0}
+.sectionhead{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:30px}
+.kicker{color:var(--accent);font-weight:800;font-size:.88rem}
+.grid{display:grid;gap:20px}
+.grid3{grid-template-columns:repeat(3,1fr)}
+.grid2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.card p:last-child{margin-bottom:0}
+.meta{font-size:.9rem;color:var(--muted)}
+.number{font-size:3rem;font-weight:900;line-height:1;color:var(--accent);margin-bottom:12px}
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.timeline .date{font-size:1.55rem;font-weight:850}
+.timeline .event{font-size:.92rem;color:var(--muted)}
+.media-card{overflow:hidden;padding:0}
+.media-top{min-height:185px;padding:28px;display:flex;flex-direction:column;justify-content:end}
+.rpp{background:linear-gradient(135deg,#d7e9f4,#eef5f6)}
+.infobae{background:linear-gradient(135deg,#dcebdc,#f4f5ed)}
+.media-body{padding:28px}
+.tag{display:inline-block;background:var(--accent2);color:var(--ink);font-size:.76rem;font-weight:800;padding:5px 9px;border-radius:999px;margin:3px}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:18px;background:#fff}
+table{border-collapse:collapse;width:100%;min-width:720px}
+th,td{text-align:left;padding:16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#edf4ef}
+tr:last-child td{border-bottom:0}
+.callout{padding:30px;border-radius:var(--radius);background:var(--ink);color:#fff;box-shadow:var(--shadow)}
+.callout p{color:#dce9e3}
+.question{font-size:clamp(1.5rem,3vw,2.4rem);font-weight:800;line-height:1.2}
+.accordion{border:1px solid var(--line);border-radius:18px;background:#fff;margin:10px 0;overflow:hidden}
+.accordion button{width:100%;border:0;background:none;text-align:left;padding:19px 22px;font:inherit;font-weight:800;color:var(--ink);cursor:pointer}
+.panel{display:none;padding:0 22px 20px;color:var(--muted)}
+.accordion.open .panel{display:block}
+.quote{font-size:1.4rem;line-height:1.4;font-weight:750}
+.source{padding:18px 0;border-bottom:1px solid var(--line)}
+.source:last-child{border-bottom:0}
+footer{background:#102b26;color:#dce9e3;padding:62px 0}
+footer h2{color:#fff}
+.credits{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:25px}
+.credit{padding:14px 16px;border:1px solid rgba(255,255,255,.15);border-radius:14px}
+.small{font-size:.88rem;color:#9fb7ae}
+.reveal{opacity:0;transform:translateY(18px);transition:.7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:800px){
+ .navlinks{display:none}.grid3,.grid2,.timeline,.credits{grid-template-columns:1fr}
+ section{padding:60px 0}.hero{padding:70px 0 55px}
+ .sectionhead{display:block}
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  margin-top: 25px;
+  background: #102b26;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container navin">
+    <div class="brand">SOSTENIBILIDAD × MEDIOS</div>
+    <div class="navlinks">
+      <a href="#caso">Caso</a><a href="#medios">Medios</a><a href="#video">Video</a><a href="#analisis">Análisis</a>
+      <a href="#educom">Educomunicación</a><a href="#conclusiones">Conclusiones</a>
+      <a href="#fuentes">Fuentes</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">Análisis de contenidos tradicionales y digitales · 2026</div>
+    <h1>¿Informar sobre sostenibilidad también es educar?</h1>
+    <p class="lead">Análisis comparativo de RPP e Infobae desde una perspectiva educomunicativa: cómo dos contenidos construyen, explican y acercan la sostenibilidad al ciudadano.</p>
+    <div class="btns">
+      <a class="btn primary" href="#caso">Explorar el análisis ↓</a>
+      <a class="btn light" target="_blank" rel="noopener" href="https://rpp.pe/peru/actualidad/cumbre-peru-sostenible-2026-8-plazas-tematicas-paneles-para-conocer-de-cerca-la-sostenibilidad-del-pais-mas-de-25-emprendimientos-con-proposito-un-concierto-de-cierre-y-muchas-actividades-culturales-noticia-1708629?ref=rpp">Ver RPP ↗</a>
+      <a class="btn light" target="_blank" rel="noopener" href="https://www.infobae.com/peru/2026/09/01/dos-de-cada-tres-empresas-en-peru-asume-compromisos-climaticos-pero-solo-el-23-cumple-su-meta-de-reduccion-de-emisiones/">Ver Infobae ↗</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="caso">
+  <div class="container reveal">
+    <div class="sectionhead">
+      <div><div class="kicker">01 · El caso</div><h2>Sostenibilidad entre información y educación</h2></div>
+      <p class="meta">Dos medios · dos formas de construir el mismo tema</p>
+    </div>
+    <div class="grid grid3">
+      <div class="card"><div class="number">01</div><h3>RPP</h3><p>“Cumbre Perú Sostenible 2026”: un contenido centrado en el evento, sus ocho plazas temáticas, actividades, emprendimientos y participación de organizaciones.</p></div>
+      <div class="card"><div class="number">02</div><h3>Infobae</h3><p>“Dos de cada tres empresas en Perú asume compromisos climáticos, pero solo el 23% cumple su meta de reducción de emisiones”: un contenido periodístico que presenta datos, voces expertas y retos de gestión climática empresarial en el Perú.</p></div>
+      <div class="card"><div class="number">03</div><h3>Pregunta guía</h3><p>¿Cuándo la transmisión de información puede convertirse en una oportunidad de comprensión, reflexión y participación ciudadana?</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff">
+  <div class="container reveal">
+    <div class="sectionhead"><div><div class="kicker">Fechas monitoreadas</div><h2>Una pequeña línea de tiempo</h2></div></div>
+    <div class="timeline">
+      <div class="card"><div class="date">01 SEP 2026</div><div class="event">Publicación del artículo de Infobae sobre compromisos climáticos empresariales en el Perú.</div></div>
+      <div class="card"><div class="date">21 SEP 2026</div><div class="event">Actualización de la nota de RPP.</div></div>
+      <div class="card"><div class="date">24–26 SEP 2026</div><div class="event">Fechas anunciadas para la Cumbre Perú Sostenible 2026. Es la fecha del evento, no una fecha de monitoreo.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="medios">
+  <div class="container reveal">
+    <div class="sectionhead">
+      <div><div class="kicker">02 · Evidencias</div><h2>Dos medios, dos aproximaciones</h2></div>
+      <p class="meta">Haz clic en los botones para consultar los contenidos originales.</p>
+    </div>
+    <div class="grid grid2">
+      <article class="card media-card">
+        <div class="media-top rpp"><span class="eyebrow">RPP</span><h2>La sostenibilidad como experiencia</h2></div>
+        <div class="media-body">
+          <span class="tag">Evento</span><span class="tag">Experiencia</span><span class="tag">Iniciativas</span>
+          <p>RPP presenta la sostenibilidad mediante una experiencia concreta: la Cumbre, sus ocho plazas temáticas, actividades culturales, emprendimientos y actores participantes.</p>
+          <p><strong>Aporte principal:</strong> acerca al público a acciones y experiencias concretas.</p>
+          <a class="btn primary" target="_blank" rel="noopener" href="https://rpp.pe/peru/actualidad/cumbre-peru-sostenible-2026-8-plazas-tematicas-paneles-para-conocer-de-cerca-la-sostenibilidad-del-pais-mas-de-25-emprendimientos-con-proposito-un-concierto-de-cierre-y-muchas-actividades-culturales-noticia-1708629?ref=rpp">Leer artículo de RPP ↗</a>
+        </div>
+      </article>
+      <article class="card media-card">
+        <div class="media-top infobae"><span class="eyebrow">Infobae</span><h2>La sostenibilidad como reto empresarial</h2></div>
+        <div class="media-body">
+          <span class="tag">Datos</span><span class="tag">Clima</span><span class="tag">Empresas</span>
+          <p>Infobae aborda la sostenibilidad desde la gestión climática empresarial: presenta datos sobre compromisos y reducción de emisiones, incorpora la voz de Perú Sostenible y relaciona el tema con riesgos, financiamiento, indicadores y economía circular.</p>
+          <p><strong>Aporte principal:</strong> aporta datos, ejemplos y voces expertas para comprender la brecha entre compromisos climáticos y resultados empresariales.</p>
+          <a class="btn primary" target="_blank" rel="noopener" href="https://www.infobae.com/peru/2026/09/01/dos-de-cada-tres-empresas-en-peru-asume-compromisos-climaticos-pero-solo-el-23-cumple-su-meta-de-reduccion-de-emisiones/">Leer artículo de Infobae ↗</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff">
+  <div class="container reveal">
+    <div class="sectionhead"><div><div class="kicker">Comparación</div><h2>¿Cómo presenta cada medio la sostenibilidad?</h2></div></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Aspecto</th><th>RPP</th><th>Infobae</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Propósito predominante</strong></td><td>Informar sobre un evento.</td><td>Informar y contextualizar un problema de gestión climática empresarial.</td></tr>
+          <tr><td><strong>Tratamiento</strong></td><td>Informativo y experiencial.</td><td>Periodístico, basado en datos, declaraciones y casos empresariales.</td></tr>
+          <tr><td><strong>Sostenibilidad</strong></td><td>Se muestra mediante iniciativas y actividades.</td><td>Se aborda mediante compromisos climáticos, emisiones, riesgos, financiamiento y economía circular.</td></tr>
+          <tr><td><strong>Relación con el ciudadano</strong></td><td>Invita a conocer y participar.</td><td>Ofrece información para interpretar la situación de las empresas y sus retos de sostenibilidad.</td></tr>
+          <tr><td><strong>Dimensiones</strong></td><td>Ambiental, social y económica aparecen a través de las plazas y temas del evento.</td><td>Predomina la dimensión ambiental y económica; también aparecen aspectos sociales y de gobernanza mediante los criterios ASG.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<section id="analisis">
+  <div class="container reveal">
+    <div class="sectionhead"><div><div class="kicker">03 · Análisis crítico</div><h2>Informar no es necesariamente educar</h2></div></div>
+    <div class="grid grid2">
+      <div class="card">
+        <h3>RPP: acercar mediante la experiencia</h3>
+        <p>RPP cumple principalmente una función informativa: permite conocer qué es la Cumbre, qué actividades tendrá y qué organizaciones participan. Esto puede acercar al ciudadano a experiencias concretas de sostenibilidad.</p>
+        <p>Al mismo tiempo, el contenido está vinculado con la promoción del evento y con la presentación de iniciativas empresariales. Por ello, su tratamiento prioriza la experiencia y la información sobre el evento.</p>
+      </div>
+      <div class="card">
+        <h3>Infobae: informar con datos y voces expertas</h3>
+        <p>Infobae desarrolla una función informativa y contextual: presenta que el 63% de las empresas evaluadas en EGS 2025 asumió públicamente una meta de emisiones netas, pero solo el 23% alcanzó su objetivo de reducción de emisiones de alcance 1. También incorpora declaraciones de Perú Sostenible, datos sobre planes, indicadores, financiamiento y ejemplos empresariales.</p>
+        <p>Esto ofrece herramientas para comprender la distancia entre compromisos y resultados. A la vez, el enfoque está centrado principalmente en la gestión empresarial, por lo que una lectura crítica debe observar qué actores, dimensiones y experiencias sociales quedan menos desarrollados.</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:20px">
+      <div class="question">“La educación no se limita a recibir datos.”</div>
+      <p>Desde el enfoque trabajado en clase, una dimensión educativa más profunda implica comprensión, reflexión, desarrollo de capacidades y participación. Los medios pueden contribuir a ello cuando ofrecen contexto y herramientas para interpretar críticamente la realidad.</p>
+    </div>
+  </div>
+</section>
+
+<section id="educom" style="background:#fff">
+  <div class="container reveal">
+    <div class="sectionhead"><div><div class="kicker">04 · Enfoque educomunicativo</div><h2>¿Qué pasa cuando comunicación y educación se encuentran?</h2></div></div>
+    <div class="grid grid3">
+      <div class="card"><h3>Comprender</h3><p>¿El contenido explica el problema y proporciona contexto suficiente para entenderlo?</p></div>
+      <div class="card"><h3>Pensar críticamente</h3><p>¿Permite identificar quién comunica, qué información selecciona y qué perspectivas quedan menos desarrolladas?</p></div>
+      <div class="card"><h3>Participar</h3><p>¿Abre posibilidades para que el ciudadano relacione el tema con su realidad y actúe en su comunidad?</p></div>
+    </div>
+
+    <div style="margin-top:32px">
+      <div class="accordion"><button>▸ RPP — ¿qué elementos educomunicativos aparecen?</button><div class="panel">Hay elementos experienciales y participativos: el público puede conocer actividades, iniciativas y espacios vinculados con la sostenibilidad. Predomina, sin embargo, la función informativa del evento.</div></div>
+      <div class="accordion"><button>▸ Infobae — ¿qué elementos educomunicativos aparecen?</button><div class="panel">Hay elementos de contextualización y pensamiento crítico: se presentan porcentajes, ejemplos empresariales, estándares de divulgación como NIIF S1 y NIIF S2 y la voz de Perú Sostenible. El contenido permite relacionar los compromisos climáticos con decisiones de inversión, riesgos, indicadores y resultados. Sin embargo, el enfoque está fuertemente centrado en la gestión corporativa.</div></div>
+      <div class="accordion"><button>▸ Una lectura crítica — ¿quién comunica y desde dónde?</button><div class="panel">Analizar medios no consiste solamente en medir cuánta información entregan. También implica observar quién produce el contenido, qué actores aparecen, qué temas se priorizan y qué aspectos pueden quedar menos desarrollados.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container reveal">
+    <div class="callout">
+      <div class="kicker" style="color:#b9d9c9">Reflexión ciudadana</div>
+      <div class="quote">“El reto de la comunicación no consiste únicamente en decir qué está ocurriendo, sino también en generar condiciones para que las personas puedan comprender, cuestionar y participar.”</div>
+      <p>En sostenibilidad esto resulta especialmente relevante porque el concepto involucra dimensiones ambientales, sociales y económicas.</p>
+    </div>
+  </div>
+</section>
+
+<section id="conclusiones">
+  <div class="container reveal">
+    <div class="sectionhead"><div><div class="kicker">05 · Conclusiones</div><h2>Lo que deja el análisis</h2></div></div>
+    <div class="card">
+      <p>El análisis de RPP e Infobae permite observar que un mismo tema puede ser construido mediáticamente de formas diferentes.</p>
+      <p><strong>RPP</strong> presenta la sostenibilidad principalmente mediante una experiencia concreta: la Cumbre Perú Sostenible, sus actividades, organizaciones y plazas temáticas.</p>
+      <p><strong>Infobae</strong> aborda la sostenibilidad desde la gestión climática empresarial: presenta datos sobre compromisos y reducción de emisiones, voces expertas, riesgos y ejemplos de empresas que vinculan sostenibilidad con resultados económicos y operativos.</p>
+      <p>Desde el enfoque educomunicativo, ambos contenidos presentan elementos que pueden contribuir al aprendizaje, pero ninguno debe entenderse automáticamente como un proceso educativo completo. La educación requiere no solamente información, sino también comprensión, reflexión, participación y desarrollo de pensamiento crítico.</p>
+      <p><strong>Conclusión central:</strong> los medios pueden convertirse en espacios de aprendizaje cuando la información se acompaña de contexto, diversidad de perspectivas y oportunidades para que el ciudadano construya una mirada crítica sobre los problemas de su sociedad.</p>
+    </div>
+    <div class="card" style="margin-top:20px;background:#edf4ef">
+      <div class="question">Pregunta final</div>
+      <p>Si los medios informan sobre los grandes problemas de nuestra sociedad, ¿cómo pueden hacerlo de manera que el ciudadano no solo conozca la realidad, sino que también aprenda a interpretarla críticamente?</p>
+    </div>
+  </div>
+</section>
+
+<section id="fuentes" style="background:#fff">
+  <div class="container reveal">
+    <div class="sectionhead"><div><div class="kicker">06 · Fuentes y referencias</div><h2>Fuentes consultadas</h2></div></div>
+    <div class="card">
+      <div class="source"><strong>RPP.</strong> “Cumbre Perú Sostenible 2026: 8 plazas temáticas, paneles para conocer de cerca la sostenibilidad del país, más de 25 emprendimientos con propósito, un concierto de cierre y muchas actividades culturales”. Actualizado el 21 de septiembre de 2026.<br><a target="_blank" rel="noopener" href="https://rpp.pe/peru/actualidad/cumbre-peru-sostenible-2026-8-plazas-tematicas-paneles-para-conocer-de-cerca-la-sostenibilidad-del-pais-mas-de-25-emprendimientos-con-proposito-un-concierto-de-cierre-y-muchas-actividades-culturales-noticia-1708629?ref=rpp">rpp.pe ↗</a></div>
+      <div class="source"><strong>Infobae.</strong> “Dos de cada tres empresas en Perú asume compromisos climáticos, pero solo el 23% cumple su meta de reducción de emisiones”. Publicado el 1 de septiembre de 2026.<br><a target="_blank" rel="noopener" href="https://www.infobae.com/peru/2026/09/01/dos-de-cada-tres-empresas-en-peru-asume-compromisos-climaticos-pero-solo-el-23-cumple-su-meta-de-reduccion-de-emisiones/">infobae.com ↗</a></div>
+      <div class="source"><strong>Costa Filho, I. C. (2021).</strong> “Educación crítica para los medios en la ciudadanía comunicativa: apropiaciones para la crítica y para el diálogo”. <em>Revista Extraprensa</em>.<br><a target="_blank" rel="noopener" href="https://revistas.usp.br/extraprensa/es/article/view/192457">Referencia académica ↗</a></div>
+      <div class="source"><strong>Pereira, F. C. & Fossá, I. (2022).</strong> “Pedagogias de Paulo Freire: educando para a cidadania com protagonismo na comunicação”. <em>Comunicação & Educação</em>.<br><a target="_blank" rel="noopener" href="https://revistas.usp.br/comueduc/es/article/view/186628">Referencia académica ↗</a></div>
+      <div class="source"><strong>Ministerio del Ambiente del Perú.</strong> “Perú 2030: El camino hacia una economía circular”. YouTube, 31 de marzo de 2025.<br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=6DZL87GmJ78">Ver video original en YouTube ↗</a></div>
+      <div class="source"><strong>Jackiw, E. & Haracemiv, S. M. C. (2021).</strong> “Educomunicación y alfabetización mediática: diálogos freireanos en América Latina”. <em>Práxis Educativa</em>.</div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="kicker" style="color:#b9d9c9">07 · Créditos</div>
+    <h2>Producción del proyecto</h2>
+    <p class="small">Completen los nombres según la distribución real del trabajo. No atribuyan tareas que una persona no haya realizado.</p>
+    <div class="credits">
+      <div class="credit"><strong>Investigación y análisis</strong><br>Piero Villanueva, Almendra Torres, Alejandro Lazarte </div>
+      <div class="credit"><strong>Diseño y desarrollo web</strong><br>Jorge Cornejo</div>
+      <div class="credit"><strong>Recopilación de fuentes</strong><br>RPP, INFOBAE</div>
+    </div>
+    <p class="small" style="margin-top:30px">Curso: Educación y Comunicación · Docente: Rosario Najar · Institución: Universidad de Lima · 2026</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.accordion button').forEach(btn=>{
+  btn.addEventListener('click',()=>btn.parentElement.classList.toggle('open'));
+});
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
